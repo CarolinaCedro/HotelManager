@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table
+@Entity
+@Table
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Guest {
 
     @Id
@@ -22,4 +22,10 @@ public class Guest {
     private String Address;
     private Integer RoomNo;
 
+    public Guest(String name, Integer phoneNo, String address, Integer roomNo) {
+        Name = name;
+        PhoneNo = phoneNo;
+        Address = address;
+        RoomNo = roomNo;
+    }
 }
