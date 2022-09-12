@@ -15,17 +15,11 @@ import javax.persistence.*;
 public class Guest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
     private String Name;
     private Integer PhoneNo;
     private String Address;
     private Integer RoomNo;
 
-    public Guest(String name, Integer phoneNo, String address, Integer roomNo) {
-        Name = name;
-        PhoneNo = phoneNo;
-        Address = address;
-        RoomNo = roomNo;
-    }
 }
