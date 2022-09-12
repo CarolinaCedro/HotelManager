@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table
+@Entity
+@Table
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Long Id;
     private String Name;
     private Integer PhoneNo;
     private String Location;
