@@ -16,7 +16,7 @@ public class Receptionist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Long Id;
     private String Name;
     private Integer PhoneNo;
     private String Location;
