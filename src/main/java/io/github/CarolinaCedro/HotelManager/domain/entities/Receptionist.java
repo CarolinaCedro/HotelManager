@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table
+@Entity
+@Table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Receptionist {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
     private String Name;
     private Integer PhoneNo;

@@ -13,7 +13,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Guest {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
@@ -21,5 +20,4 @@ public class Guest {
     private Integer PhoneNo;
     private String Address;
     private Integer RoomNo;
-
 }

@@ -11,7 +11,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/guests")
-public class GuestController {
+public class ReceptionistController {
 
     @Autowired
     GuestService service;
