@@ -6,15 +6,16 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-//@Entity
-//@Table
+@Entity
+@Table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class HouseKeeping {
     @javax.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Long Id;
     private String Name;
     private String Location;
 }
+
