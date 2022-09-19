@@ -16,6 +16,9 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+//    @ManyToOne
+//    @JoinColumn(name = "categoria_id")
+//    private Manager manager;
     private String Name;
     private Integer PhoneNo;
     private String Address;

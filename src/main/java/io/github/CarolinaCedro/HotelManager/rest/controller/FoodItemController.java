@@ -1,8 +1,6 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
-import io.github.CarolinaCedro.HotelManager.domain.entities.Chef;
 import io.github.CarolinaCedro.HotelManager.domain.entities.FoodItems;
-import io.github.CarolinaCedro.HotelManager.service.ChefService;
 import io.github.CarolinaCedro.HotelManager.service.FoodItemsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
