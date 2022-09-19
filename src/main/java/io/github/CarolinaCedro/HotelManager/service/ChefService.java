@@ -1,7 +1,8 @@
 package io.github.CarolinaCedro.HotelManager.service;
 
+import io.github.CarolinaCedro.HotelManager.domain.entities.Chef;
 import io.github.CarolinaCedro.HotelManager.domain.entities.Guest;
-import io.github.CarolinaCedro.HotelManager.domain.repository.GuestRepository;
+import io.github.CarolinaCedro.HotelManager.domain.repository.ChefRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -12,39 +13,37 @@ import java.util.Optional;
 @Service
 public class ChefService {
     @Autowired
-    GuestRepository guestRepository;
+    ChefRepository chefRepository;
 
 
-    public List<Guest> getGuest() {
-        List<Guest> list = guestRepository.findAll();
+    public List<Chef> getChef() {
+        List<Chef> list = chefRepository.findAll();
         return list;
     }
 
 
-    public Optional<Guest> getById(Long id) {
-        return guestRepository.findById(id);
+    public Optional<Chef> getById(Long id) {
+        return chefRepository.findById(id);
     }
 
-    public Guest save(Guest guest) {
-        return guestRepository.save(guest);
+    public Chef save(Chef chef) {
+        return chefRepository.save(chef);
     }
 
-    public Guest update(Guest guest, Long id) {
+    public Chef update(Chef chef, Long id) {
         Assert.notNull(id, "Não foi possivel atualizar o registro");
-        Optional<Guest> optional = guestRepository.findById(id);
+        Optional<Chef> optional = chefRepository.findById(id);
         if (optional.isPresent()) {
-            Guest db = optional.get();
-            db.setName(guest.getName());
-            db.setAddress(guest.getAddress());
-            db.setRoomNo(guest.getRoomNo());
-            db.setPhoneNo(guest.getPhoneNo());
-            guestRepository.save(db);
+            Chef db = optional.get();
+            db.setName(chef.getName());
+            db.setLocation(chef.getLocation());
+            chefRepository.save(db);
             return db;
         }
         return null;
     }
 
     public void deleteById(Long id) {
-        guestRepository.deleteById(id);
+        chefRepository.deleteById(id);
     }
 }

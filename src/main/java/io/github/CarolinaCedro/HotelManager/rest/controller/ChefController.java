@@ -1,6 +1,8 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
+import io.github.CarolinaCedro.HotelManager.domain.entities.Chef;
 import io.github.CarolinaCedro.HotelManager.domain.entities.Guest;
+import io.github.CarolinaCedro.HotelManager.service.ChefService;
 import io.github.CarolinaCedro.HotelManager.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,15 +12,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/guests")
+@RequestMapping("/chefs")
 public class ChefController {
 
     @Autowired
-    GuestService service;
+    ChefService service;
 
     @GetMapping
     public ResponseEntity get() {
-        return ResponseEntity.ok(service.getGuest());
+        return ResponseEntity.ok(service.getChef());
     }
 
     @GetMapping("/{id}")
@@ -27,17 +29,17 @@ public class ChefController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody Guest guest) {
-        Guest s = service.save(guest);
+    public ResponseEntity save(@RequestBody Chef chef) {
+        Chef s = service.save(chef);
         URI location = getUri(s.getId());
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Guest guest) {
-        guest.setId(id);
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Chef chef) {
+        chef.setId(id);
 
-        Guest UpdateGuest = service.update(guest, id);
+        Chef UpdateGuest = service.update(chef, id);
         return UpdateGuest != null ?
                 ResponseEntity.ok(UpdateGuest) :
                 ResponseEntity.notFound().build();
