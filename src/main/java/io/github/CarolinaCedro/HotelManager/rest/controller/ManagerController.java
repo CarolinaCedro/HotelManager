@@ -3,6 +3,7 @@ package io.github.CarolinaCedro.HotelManager.rest.controller;
 import io.github.CarolinaCedro.HotelManager.domain.entities.Manager;
 import io.github.CarolinaCedro.HotelManager.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -44,9 +45,9 @@ public class ManagerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         service.deleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     private URI getUri(Long id) {

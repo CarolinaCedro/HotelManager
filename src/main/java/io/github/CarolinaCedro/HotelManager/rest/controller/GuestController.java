@@ -1,6 +1,5 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
-import com.sun.xml.bind.v2.TODO;
 import io.github.CarolinaCedro.HotelManager.domain.entities.Guest;
 import io.github.CarolinaCedro.HotelManager.domain.repository.GuestRepository;
 import io.github.CarolinaCedro.HotelManager.service.GuestService;
