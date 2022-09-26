@@ -16,9 +16,7 @@ public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
-//    @OneToMany(mappedBy = "guest")
-//    private List<Guest> guests;
     private String Name;
-    private Integer PhoneNo;
+    private String PhoneNo;
     private String Location;
 }

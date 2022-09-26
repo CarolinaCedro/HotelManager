@@ -16,11 +16,12 @@ public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-//    @ManyToOne
-//    @JoinColumn(name = "categoria_id")
-//    private Manager manager;
+    @Column(name = "name")
     private String Name;
-    private Integer PhoneNo;
+    @Column(name = "phoneno")
+    private String PhoneNo;
+    @Column(name = "address")
     private String Address;
-    private Integer RoomNo;
+    @Column(name = "roomno")
+    private String RoomNo;
 }

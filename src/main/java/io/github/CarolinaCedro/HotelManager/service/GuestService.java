@@ -2,13 +2,14 @@ package io.github.CarolinaCedro.HotelManager.service;
 
 import io.github.CarolinaCedro.HotelManager.domain.entities.Guest;
 import io.github.CarolinaCedro.HotelManager.domain.repository.GuestRepository;
+import io.github.CarolinaCedro.HotelManager.exception.DomainException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class GuestService {
@@ -22,8 +23,8 @@ public class GuestService {
     }
 
 
-    public Optional<Guest> getById(Long id) {
-        return guestRepository.findById(id);
+    public Guest getById(Long id) {
+        return guestRepository.findById(id).orElseThrow(()-> new DomainException("Cliente não encontrado"));
     }
 
     public Guest save(Guest guest) {
@@ -45,6 +46,7 @@ public class GuestService {
         return null;
     }
 
+    @Transactional
     public void deleteById(Long id) {
         guestRepository.deleteById(id);
     }

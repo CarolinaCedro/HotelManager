@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Bill {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer BillNo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long BillNo;
     private String GuestName;
 }

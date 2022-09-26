@@ -1,8 +1,11 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
+import com.sun.xml.bind.v2.TODO;
 import io.github.CarolinaCedro.HotelManager.domain.entities.Guest;
+import io.github.CarolinaCedro.HotelManager.domain.repository.GuestRepository;
 import io.github.CarolinaCedro.HotelManager.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,6 +18,8 @@ public class GuestController {
 
     @Autowired
     GuestService service;
+    @Autowired
+    GuestRepository guestRepository;
 
     @GetMapping
     public ResponseEntity get() {
@@ -22,8 +27,10 @@ public class GuestController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(service.getById(id));
+    public ResponseEntity<Guest> getById(@PathVariable("id") Long id) {
+//        return ResponseEntity.ok(service.getById(id));
+        //TODO= Passar essa logica pra uma camada abaixo!!! não deixar assim direto
+        return guestRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -44,9 +51,10 @@ public class GuestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     private URI getUri(Long id) {

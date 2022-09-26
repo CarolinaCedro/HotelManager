@@ -15,12 +15,10 @@ public class ChefService {
     @Autowired
     ChefRepository chefRepository;
 
-
     public List<Chef> getChef() {
         List<Chef> list = chefRepository.findAll();
         return list;
     }
-
 
     public Optional<Chef> getById(Long id) {
         return chefRepository.findById(id);
