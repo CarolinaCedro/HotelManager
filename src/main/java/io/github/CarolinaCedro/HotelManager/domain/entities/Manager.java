@@ -1,20 +1,23 @@
 package io.github.CarolinaCedro.HotelManager.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "manager")
+@Table
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Manager {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long Id;
     @Column(name = "name")
     private String Name;
@@ -22,9 +25,7 @@ public class Manager {
     private String PhoneNo;
     @Column(name = "location")
     private String Location;
-    @ManyToMany
-    @JoinTable(name="manager_has_guest", joinColumns=
-            {@JoinColumn(name="manager_id")}, inverseJoinColumns=
-            {@JoinColumn(name="guest_id")})
-    private List<Guest> guest;
+
+    @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
+    private List<Guest> guest = new ArrayList<>();
 }

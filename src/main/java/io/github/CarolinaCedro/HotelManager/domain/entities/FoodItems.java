@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Table
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table
 public class FoodItems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

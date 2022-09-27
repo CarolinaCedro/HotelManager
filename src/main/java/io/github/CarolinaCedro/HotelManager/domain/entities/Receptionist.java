@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -16,8 +18,15 @@ public class Receptionist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long Id;
+    @Column(name = "name")
     private String Name;
-    private Integer PhoneNo;
+    @Column(name = "phoneNo")
+    private String PhoneNo;
+    @Column(name = "location")
     private String Location;
+
+//    @OneToMany(mappedBy = "receptionist", fetch = FetchType.LAZY)
+//    private List<Bill>bill = new ArrayList<>();
 }

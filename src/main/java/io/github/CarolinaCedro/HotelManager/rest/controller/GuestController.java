@@ -1,6 +1,7 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
 import io.github.CarolinaCedro.HotelManager.domain.entities.Guest;
+import io.github.CarolinaCedro.HotelManager.domain.entities.Manager;
 import io.github.CarolinaCedro.HotelManager.domain.repository.GuestRepository;
 import io.github.CarolinaCedro.HotelManager.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class GuestController {
 
     @PostMapping
     public ResponseEntity save(@RequestBody Guest guest) {
+        guest.setManager(guest.getManager());
         Guest s = service.save(guest);
         URI location = getUri(s.getId());
         return ResponseEntity.created(location).build();
