@@ -1,27 +1,32 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
-import io.github.CarolinaCedro.HotelManager.domain.entities.Guest;
-import io.github.CarolinaCedro.HotelManager.domain.entities.Receptionist;
-import io.github.CarolinaCedro.HotelManager.service.GuestService;
-import io.github.CarolinaCedro.HotelManager.service.ReceptionistService;
+import io.github.CarolinaCedro.HotelManager.dto.GuestInput.ChefInput;
+import io.github.CarolinaCedro.HotelManager.infra.entities.Chef;
+import io.github.CarolinaCedro.HotelManager.infra.entities.FoodItems;
+import io.github.CarolinaCedro.HotelManager.infra.entities.Guest;
+import io.github.CarolinaCedro.HotelManager.infra.repository.FoodItemsRepository;
+import io.github.CarolinaCedro.HotelManager.service.ChefService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/receptionists")
-public class ReceptionistController {
+@RequestMapping("/chefs")
+public class ChefController {
 
     @Autowired
-    ReceptionistService service;
+    ChefService service;
+
+    @Autowired
+    FoodItemsRepository foodItemsRepository;
 
     @GetMapping
     public ResponseEntity get() {
-        return ResponseEntity.ok(service.getReceptionist());
+        return ResponseEntity.ok(service.getChef());
     }
 
     @GetMapping("/{id}")
@@ -30,17 +35,20 @@ public class ReceptionistController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody Receptionist receptionist) {
-        Receptionist s = service.save(receptionist);
+    public ResponseEntity save(@RequestBody ChefInput chefInput) {
+        Optional<FoodItems> Foods = foodItemsRepository.findById(chefInput.getFoodItems());
+
+        Chef chef = new Chef(chefInput.getName(),chefInput.getLocation(),Foods.get());
+        Chef s = service.save(chef);
         URI location = getUri(s.getId());
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Receptionist receptionist) {
-        receptionist.setId(id);
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Chef chef) {
+        chef.setId(id);
 
-        Receptionist UpdateGuest = service.update(receptionist, id);
+        Chef UpdateGuest = service.update(chef, id);
         return UpdateGuest != null ?
                 ResponseEntity.ok(UpdateGuest) :
                 ResponseEntity.notFound().build();

@@ -1,7 +1,7 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
-import io.github.CarolinaCedro.HotelManager.infra.entities.Manager;
-import io.github.CarolinaCedro.HotelManager.service.ManagerService;
+import io.github.CarolinaCedro.HotelManager.infra.entities.HouseKeeping;
+import io.github.CarolinaCedro.HotelManager.service.HouseKeepingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,15 +10,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/managers")
-public class ManagerController {
+@RequestMapping("/houseKeepings")
+public class HouseKeepingController {
 
     @Autowired
-    ManagerService service;
+    HouseKeepingService service;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity get() {
-        return ResponseEntity.ok(service.getManager());
+        return ResponseEntity.ok(service.getHouse());
     }
 
     @GetMapping("/{id}")
@@ -27,26 +27,25 @@ public class ManagerController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody Manager manager) {
-        Manager s = service.save(manager);
+    public ResponseEntity save(@RequestBody HouseKeeping houseKeeping) {
+        HouseKeeping s = service.save(houseKeeping);
         URI location = getUri(s.getId());
         return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Manager manager) {
-        manager.setId(id);
-
-        Manager UpdateManager = service.update(manager, id);
-        return UpdateManager != null ?
-                ResponseEntity.ok(UpdateManager) :
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody HouseKeeping houseKeeping) {
+        houseKeeping.setId(id);
+        HouseKeeping UpdateHouse = service.update(houseKeeping, id);
+        return UpdateHouse != null ?
+                ResponseEntity.ok(UpdateHouse) :
                 ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+    public ResponseEntity delete(@PathVariable("id") Long id) {
         service.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     private URI getUri(Long id) {

@@ -1,13 +1,12 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
-import io.github.CarolinaCedro.HotelManager.dto.GuestInput.BillInput;
+import io.github.CarolinaCedro.HotelManager.dto.GuestInput.GuestInput;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Bill;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Guest;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Manager;
 import io.github.CarolinaCedro.HotelManager.infra.repository.BillRepository;
 import io.github.CarolinaCedro.HotelManager.infra.repository.GuestRepository;
 import io.github.CarolinaCedro.HotelManager.infra.repository.ManagerRepository;
-import io.github.CarolinaCedro.HotelManager.dto.GuestInput.GuestInput;
 import io.github.CarolinaCedro.HotelManager.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +18,8 @@ import java.net.URI;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/guests")
-public class GuestController {
+@RequestMapping("/bills")
+public class BillController {
 
     @Autowired
     GuestService service;
@@ -45,17 +44,8 @@ public class GuestController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody GuestInput guestInput) {
-
-        Optional<Manager> manager = managerRepository.findById(guestInput.getManager());
-        Optional<Bill>bill = billRepository.findById(guestInput.getBill());
-
-        Guest guest = new Guest(
-                guestInput.getName(),guestInput.getPhoneno(),
-                guestInput.getAddress(),guestInput.getRoomno(),manager.get(),bill.get());
-        Guest s = service.save(guest);
-        URI location = getUri(guest.getManager().getId());
-        return ResponseEntity.created(location).build();
+    public ResponseEntity save(@RequestBody Bill bill) {
+        return ResponseEntity.ok(billRepository.save(bill));
     }
 
     @PutMapping("/{id}")

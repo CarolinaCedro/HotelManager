@@ -1,17 +1,16 @@
-package io.github.CarolinaCedro.HotelManager.domain.entities;
+package io.github.CarolinaCedro.HotelManager.infra.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Rooms {
-    private Integer RoomNo;
+
+    private Long RoomNo;
     private String Location;
 }

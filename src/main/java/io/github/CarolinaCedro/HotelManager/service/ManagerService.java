@@ -1,7 +1,7 @@
 package io.github.CarolinaCedro.HotelManager.service;
 
-import io.github.CarolinaCedro.HotelManager.domain.entities.Manager;
-import io.github.CarolinaCedro.HotelManager.domain.repository.ManagerRepository;
+import io.github.CarolinaCedro.HotelManager.infra.entities.Manager;
+import io.github.CarolinaCedro.HotelManager.infra.repository.ManagerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -24,6 +24,7 @@ public class ManagerService {
     public Optional<Manager> getById(Long id) {
         return managerRepository.findById(id);
     }
+
 
     public Manager save(Manager manager) {
         return managerRepository.save(manager);

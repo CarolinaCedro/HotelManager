@@ -1,4 +1,4 @@
-package io.github.CarolinaCedro.HotelManager.domain.entities;
+package io.github.CarolinaCedro.HotelManager.infra.entities;
 
 
 import lombok.AllArgsConstructor;
@@ -12,12 +12,20 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Receptionist {
-
+public class Chef {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
+    @Column(name = "name")
     private String Name;
-    private Integer PhoneNo;
+    @Column(name = "location")
     private String Location;
+
+
+
+    public Chef(String name, String location, FoodItems foodItems) {
+        Name = name;
+        Location = location;
+        this.foodItems = foodItems;
+    }
 }
