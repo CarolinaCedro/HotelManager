@@ -1,9 +1,9 @@
 package io.github.CarolinaCedro.HotelManager.service;
 
+
+
 import io.github.CarolinaCedro.HotelManager.infra.entities.Bill;
-import io.github.CarolinaCedro.HotelManager.infra.entities.HouseKeeping;
 import io.github.CarolinaCedro.HotelManager.infra.repository.BillRepository;
-import io.github.CarolinaCedro.HotelManager.infra.repository.HouseKeepingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -17,8 +17,15 @@ public class BillService {
     BillRepository billRepository;
 
 
+
     public List<Bill> getHouse() {
          List<Bill> list = billRepository.findAll();
+        return list;
+    }
+
+
+    public List<Bill> getBill() {
+        List<Bill> list = billRepository.findAll();
         return list;
     }
 
@@ -30,6 +37,7 @@ public class BillService {
     public Bill save(Bill bill) {
         return billRepository.save(bill);
     }
+
 
     public Bill update(Bill bill, Long id) {
         Assert.notNull(id, "Não foi possivel atualizar o registro");

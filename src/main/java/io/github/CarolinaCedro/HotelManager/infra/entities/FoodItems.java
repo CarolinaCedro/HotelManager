@@ -1,12 +1,10 @@
 package io.github.CarolinaCedro.HotelManager.infra.entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
 
 @Data
 @AllArgsConstructor
@@ -22,6 +20,6 @@ public class FoodItems {
     @ManyToOne
     @JoinTable(name="chefe_has_food", joinColumns=
             {@JoinColumn(name="chefe_id")}, inverseJoinColumns=
-            {@JoinColumn(name="foodItems_id")})
+            {@JoinColumn(name="fooditems_id")})
     private FoodItems foodItems;
 }

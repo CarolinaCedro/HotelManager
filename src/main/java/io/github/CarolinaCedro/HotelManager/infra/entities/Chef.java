@@ -1,11 +1,11 @@
 package io.github.CarolinaCedro.HotelManager.infra.entities;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -18,14 +18,16 @@ public class Chef {
     private Long Id;
     @Column(name = "name")
     private String Name;
+
+
     @Column(name = "location")
     private String Location;
 
+//    private List<FoodItems> foodItems;
 
-
-    public Chef(String name, String location, FoodItems foodItems) {
+    public Chef(String name, String location, List<FoodItems> foodItems) {
         Name = name;
         Location = location;
-        this.foodItems = foodItems;
+//        this.foodItems = foodItems;
     }
 }

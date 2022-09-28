@@ -1,6 +1,4 @@
 package io.github.CarolinaCedro.HotelManager.infra.entities;
-
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -44,5 +42,4 @@ public class Guest {
         this.manager = manager;
         this.bill = bill;
     }
-
 }

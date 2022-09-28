@@ -18,7 +18,7 @@ public class Bill {
     @Column(name="name")
     private String name;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "guest_id")
-//    private Guest guest;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "guest_id")
+    private Guest guest;
 }

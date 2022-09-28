@@ -1,13 +1,11 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
-
-import io.github.CarolinaCedro.HotelManager.dto.GuestInput.BillInput;
+import io.github.CarolinaCedro.HotelManager.dto.GuestInput.GuestInput;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Bill;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Guest;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Manager;
 import io.github.CarolinaCedro.HotelManager.infra.repository.BillRepository;
 import io.github.CarolinaCedro.HotelManager.infra.repository.GuestRepository;
 import io.github.CarolinaCedro.HotelManager.infra.repository.ManagerRepository;
-import io.github.CarolinaCedro.HotelManager.dto.GuestInput.GuestInput;
 import io.github.CarolinaCedro.HotelManager.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,11 +24,13 @@ public class GuestController {
     GuestService service;
     @Autowired
     GuestRepository guestRepository;
+
     @Autowired
     ManagerRepository managerRepository;
 
     @Autowired
     BillRepository billRepository;
+
 
     @GetMapping
     public ResponseEntity get() {
@@ -48,36 +48,40 @@ public class GuestController {
     public ResponseEntity save(@RequestBody GuestInput guestInput) {
 
         Optional<Manager> manager = managerRepository.findById(guestInput.getManager());
-        Optional<Bill>bill = billRepository.findById(guestInput.getBill());
+        Optional<Bill> bill = billRepository.findById(guestInput.getBill());
 
         Guest guest = new Guest(
-                guestInput.getName(),guestInput.getPhoneno(),
-                guestInput.getAddress(),guestInput.getRoomno(),manager.get(),bill.get());
+                guestInput.getName(), guestInput.getPhoneno(),
+                guestInput.getAddress(), guestInput.getRoomno(), manager.get(), bill.get());
+
         Guest s = service.save(guest);
-        URI location = getUri(guest.getManager().getId());
+
+        URI location = getUri(guest.getId());
         return ResponseEntity.created(location).build();
+
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Guest guest) {
-        guest.setId(id);
+        @PutMapping("/{id}")
+        public ResponseEntity update (@PathVariable("id") Long id, @RequestBody Guest guest){
+            guest.setId(id);
 
-        Guest UpdateGuest = service.update(guest, id);
-        return UpdateGuest != null ?
-                ResponseEntity.ok(UpdateGuest) :
-                ResponseEntity.notFound().build();
+            Guest UpdateGuest = service.update(guest, id);
+            return UpdateGuest != null ?
+                    ResponseEntity.ok(UpdateGuest) :
+                    ResponseEntity.notFound().build();
+        }
+
+        @DeleteMapping("/{id}")
+        @ResponseStatus(HttpStatus.NO_CONTENT)
+        public ResponseEntity<Void> delete (@PathVariable Long id){
+            service.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+
+        private URI getUri (Long id){
+            return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                    .buildAndExpand(id).toUri();
+        }
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        service.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
 
-    private URI getUri(Long id) {
-        return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(id).toUri();
-    }
-
-}

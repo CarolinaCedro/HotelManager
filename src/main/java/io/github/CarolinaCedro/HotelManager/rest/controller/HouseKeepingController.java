@@ -1,5 +1,6 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
+
 import io.github.CarolinaCedro.HotelManager.infra.entities.HouseKeeping;
 import io.github.CarolinaCedro.HotelManager.service.HouseKeepingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class HouseKeepingController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id) {
         service.deleteById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     private URI getUri(Long id) {

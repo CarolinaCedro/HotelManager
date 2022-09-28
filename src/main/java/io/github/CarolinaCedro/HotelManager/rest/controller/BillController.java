@@ -1,21 +1,19 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
-import io.github.CarolinaCedro.HotelManager.dto.GuestInput.GuestInput;
+
 import io.github.CarolinaCedro.HotelManager.infra.entities.Bill;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Guest;
-import io.github.CarolinaCedro.HotelManager.infra.entities.Manager;
 import io.github.CarolinaCedro.HotelManager.infra.repository.BillRepository;
 import io.github.CarolinaCedro.HotelManager.infra.repository.GuestRepository;
 import io.github.CarolinaCedro.HotelManager.infra.repository.ManagerRepository;
 import io.github.CarolinaCedro.HotelManager.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/bills")
@@ -41,11 +39,13 @@ public class BillController {
 //        return ResponseEntity.ok(service.getById(id));
         //TODO= Passar essa logica pra uma camada abaixo!!! não deixar assim direto
         return guestRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+
     }
+
 
     @PostMapping
     public ResponseEntity save(@RequestBody Bill bill) {
-        return ResponseEntity.ok(billRepository.save(bill));
+        return ResponseEntity.ok(bill);
     }
 
     @PutMapping("/{id}")
@@ -59,10 +59,9 @@ public class BillController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity delete(@PathVariable("id") Long id) {
         service.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
     private URI getUri(Long id) {

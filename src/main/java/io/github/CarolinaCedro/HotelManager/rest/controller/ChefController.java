@@ -1,9 +1,5 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
-
-import io.github.CarolinaCedro.HotelManager.dto.GuestInput.ChefInput;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Chef;
-import io.github.CarolinaCedro.HotelManager.infra.entities.FoodItems;
-import io.github.CarolinaCedro.HotelManager.infra.entities.Guest;
 import io.github.CarolinaCedro.HotelManager.infra.repository.FoodItemsRepository;
 import io.github.CarolinaCedro.HotelManager.service.ChefService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/chefs")
@@ -21,8 +17,10 @@ public class ChefController {
     @Autowired
     ChefService service;
 
+
     @Autowired
     FoodItemsRepository foodItemsRepository;
+
 
     @GetMapping
     public ResponseEntity get() {
@@ -35,10 +33,7 @@ public class ChefController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody ChefInput chefInput) {
-        Optional<FoodItems> Foods = foodItemsRepository.findById(chefInput.getFoodItems());
-
-        Chef chef = new Chef(chefInput.getName(),chefInput.getLocation(),Foods.get());
+    public ResponseEntity save(@RequestBody Chef chef) {
         Chef s = service.save(chef);
         URI location = getUri(s.getId());
         return ResponseEntity.created(location).build();
