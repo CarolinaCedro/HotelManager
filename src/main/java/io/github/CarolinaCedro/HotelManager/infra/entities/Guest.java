@@ -30,6 +30,7 @@ public class Guest {
     @JoinColumn(name = "manager_id",nullable = false)
     private Manager manager;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bill_id")
     private Bill bill;

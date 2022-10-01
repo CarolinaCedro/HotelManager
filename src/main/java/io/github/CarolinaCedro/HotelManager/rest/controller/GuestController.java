@@ -49,10 +49,10 @@ public class GuestController {
         Optional<Manager> manager = managerRepository.findById(guestInput.getManager());
         Optional<Bill> bill = billRepository.findById(guestInput.getBill());
 
+
         Guest guest = new Guest(
                 guestInput.getName(), guestInput.getPhoneno(),
                 guestInput.getAddress(), guestInput.getRoomno(), manager.get(), bill.get());
-
         Guest s = service.save(guest);
 
         URI location = getUri(guest.getId());

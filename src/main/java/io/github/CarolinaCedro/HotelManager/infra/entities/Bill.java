@@ -26,4 +26,8 @@ public class Bill {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "guest_id")
     private Guest guest;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "receptionist")
+    private Receptionist receptionist;
 }

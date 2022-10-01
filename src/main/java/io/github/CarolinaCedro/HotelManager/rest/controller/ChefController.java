@@ -40,7 +40,7 @@ public class ChefController {
 
         Optional<FoodItems> chefe = foodItemsRepository.findById(chefInput.getFoodItems());
 
-            List<FoodItems> foods = List.of(chefe.get());
+            Set<FoodItems> foods = new HashSet<>();
             Chef chef = new Chef(chefInput.getName(), chefInput.getLocation(), foods);
             Chef s = service.save(chef);
             URI location = getUri(s.getId());

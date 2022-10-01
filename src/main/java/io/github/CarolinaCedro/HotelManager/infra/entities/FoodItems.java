@@ -1,5 +1,6 @@
 package io.github.CarolinaCedro.HotelManager.infra.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,9 +19,10 @@ public class FoodItems {
     private Long Id;
     private String Name;
 
-//    @ManyToMany
-//    @JoinTable(name="chefe_has_food", joinColumns=
-//            {@JoinColumn(name="chef_id")}, inverseJoinColumns=
-//            {@JoinColumn(name="fooditems_id")})
-//    private List<Chef> chefs;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name="chefe_has_food", joinColumns=
+            {@JoinColumn(name="fooditems_id")}, inverseJoinColumns=
+            {@JoinColumn(name="chef_id")})
+    private List<Chef> chefs;
 }
