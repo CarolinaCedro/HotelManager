@@ -6,6 +6,7 @@ import io.github.CarolinaCedro.HotelManager.infra.entities.Guest;
 import io.github.CarolinaCedro.HotelManager.infra.repository.BillRepository;
 import io.github.CarolinaCedro.HotelManager.infra.repository.GuestRepository;
 import io.github.CarolinaCedro.HotelManager.infra.repository.ManagerRepository;
+import io.github.CarolinaCedro.HotelManager.service.BillService;
 import io.github.CarolinaCedro.HotelManager.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,19 +20,16 @@ import java.net.URI;
 @RequestMapping("/bills")
 public class BillController {
 
-    @Autowired
-    GuestService service;
-    @Autowired
-    GuestRepository guestRepository;
-    @Autowired
-    ManagerRepository managerRepository;
 
     @Autowired
-    BillRepository billRepository;
+    GuestRepository guestRepository;
+
+    @Autowired
+    BillService billService;
 
     @GetMapping
     public ResponseEntity get() {
-        return ResponseEntity.ok(service.getGuest());
+        return ResponseEntity.ok(billService.getBill());
     }
 
     @GetMapping("/{id}")
@@ -45,22 +43,23 @@ public class BillController {
 
     @PostMapping
     public ResponseEntity save(@RequestBody Bill bill) {
-        return ResponseEntity.ok(bill);
+        Bill bill1 = billService.save(bill);
+        return ResponseEntity.ok(bill1);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Guest guest) {
-        guest.setId(id);
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Bill bill) {
+        bill.setId(id);
 
-        Guest UpdateGuest = service.update(guest, id);
-        return UpdateGuest != null ?
-                ResponseEntity.ok(UpdateGuest) :
+        Bill UpdateBill = billService.update(bill, id);
+        return UpdateBill != null ?
+                ResponseEntity.ok(UpdateBill) :
                 ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable("id") Long id) {
-        service.deleteById(id);
+        billService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 

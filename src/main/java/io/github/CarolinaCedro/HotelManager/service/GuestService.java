@@ -1,5 +1,6 @@
 package io.github.CarolinaCedro.HotelManager.service;
 
+import io.github.CarolinaCedro.HotelManager.infra.entities.Bill;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Guest;
 import io.github.CarolinaCedro.HotelManager.infra.repository.GuestRepository;
 import io.github.CarolinaCedro.HotelManager.exception.DomainException;

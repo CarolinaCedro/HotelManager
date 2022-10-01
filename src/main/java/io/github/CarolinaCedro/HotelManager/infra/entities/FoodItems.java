@@ -16,10 +16,4 @@ public class FoodItems {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String Name;
-
-    @ManyToOne
-    @JoinTable(name="chefe_has_food", joinColumns=
-            {@JoinColumn(name="chefe_id")}, inverseJoinColumns=
-            {@JoinColumn(name="fooditems_id")})
-    private FoodItems foodItems;
 }

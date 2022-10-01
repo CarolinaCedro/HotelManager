@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,16 +19,18 @@ public class Chef {
     private Long Id;
     @Column(name = "name")
     private String Name;
-
-
     @Column(name = "location")
     private String Location;
 
-//    private List<FoodItems> foodItems;
+    @ManyToOne
+    @JoinTable(name="chefe_has_food", joinColumns=
+            {@JoinColumn(name="chef_id")}, inverseJoinColumns=
+            {@JoinColumn(name="fooditems_id")})
+    private FoodItems foodItems;
 
-    public Chef(String name, String location, List<FoodItems> foodItems) {
+    public Chef(String name, String location, FoodItems foodItems) {
         Name = name;
         Location = location;
-//        this.foodItems = foodItems;
+        this.foodItems = foodItems;
     }
 }

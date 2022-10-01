@@ -16,8 +16,6 @@ public class BillService {
     @Autowired
     BillRepository billRepository;
 
-
-
     public List<Bill> getHouse() {
          List<Bill> list = billRepository.findAll();
         return list;

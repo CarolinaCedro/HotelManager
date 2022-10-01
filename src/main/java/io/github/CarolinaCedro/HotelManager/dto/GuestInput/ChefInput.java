@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FoodInput {
-    private Long id;
-    private String name;
-    private Long chefe;
+public class ChefInput {
+    private String Name;
+    private String Location;
+    private Long foodItems;
 }
 
