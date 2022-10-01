@@ -21,14 +21,14 @@ public class Chef {
     @Column(name = "location")
     private String Location;
 
-    @ManyToOne
+    @ManyToMany
     @JoinTable(name="chefe_has_food", joinColumns=
             {@JoinColumn(name="chef_id")}, inverseJoinColumns=
             {@JoinColumn(name="fooditems_id")})
-    private FoodItems foodItems;
+    private List<FoodItems> foodItems;
 
 
-    public Chef(String name, String location, FoodItems foodItems) {
+    public Chef(String name, String location, List<FoodItems> foodItems) {
         Name = name;
         Location = location;
         this.foodItems = foodItems;
