@@ -5,8 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table
@@ -27,6 +26,7 @@ public class Chef {
             {@JoinColumn(name="chef_id")}, inverseJoinColumns=
             {@JoinColumn(name="fooditems_id")})
     private FoodItems foodItems;
+
 
     public Chef(String name, String location, FoodItems foodItems) {
         Name = name;

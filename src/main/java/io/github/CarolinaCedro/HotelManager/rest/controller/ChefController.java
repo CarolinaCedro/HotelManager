@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -38,10 +42,11 @@ public class ChefController {
 
         Optional<FoodItems> chefe = foodItemsRepository.findById(chefInput.getFoodItems());
 
-        Chef chef = new Chef(chefInput.getName(),chefInput.getLocation(),chefe.get());
-        Chef s = service.save(chef);
-        URI location = getUri(s.getId());
-        return ResponseEntity.created(location).build();
+            Chef chef = new Chef(chefInput.getName(),chefInput.getLocation(),chefe.get());
+            Chef s = service.save(chef);
+            URI location = getUri(s.getId());
+            return ResponseEntity.created(location).build();
+
     }
 
     @PutMapping("/{id}")

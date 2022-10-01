@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -17,6 +19,8 @@ public class Bill {
     @Column(name = "id")
     private Long id;
     @Column(name="name")
+    @NotBlank
+    @Size(max = 60)
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)

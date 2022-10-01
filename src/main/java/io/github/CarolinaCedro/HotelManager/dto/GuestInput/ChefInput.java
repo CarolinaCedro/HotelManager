@@ -1,5 +1,6 @@
 package io.github.CarolinaCedro.HotelManager.dto.GuestInput;
 
+import io.github.CarolinaCedro.HotelManager.infra.entities.FoodItems;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 
@@ -24,10 +25,8 @@ public class GuestController {
     GuestService service;
     @Autowired
     GuestRepository guestRepository;
-
     @Autowired
     ManagerRepository managerRepository;
-
     @Autowired
     BillRepository billRepository;
 
@@ -45,7 +44,7 @@ public class GuestController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody GuestInput guestInput) {
+    public ResponseEntity save(@RequestBody @Valid GuestInput guestInput) {
 
         Optional<Manager> manager = managerRepository.findById(guestInput.getManager());
         Optional<Bill> bill = billRepository.findById(guestInput.getBill());
@@ -62,7 +61,7 @@ public class GuestController {
     }
 
         @PutMapping("/{id}")
-        public ResponseEntity update (@PathVariable("id") Long id, @RequestBody Guest guest){
+        public ResponseEntity update (@PathVariable Long id, @RequestBody @Valid Guest guest){
             guest.setId(id);
 
             Guest UpdateGuest = service.update(guest, id);

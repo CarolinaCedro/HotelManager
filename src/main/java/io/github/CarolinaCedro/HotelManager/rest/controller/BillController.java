@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 
@@ -42,13 +43,13 @@ public class BillController {
 
 
     @PostMapping
-    public ResponseEntity save(@RequestBody Bill bill) {
+    public ResponseEntity save(@RequestBody @Valid Bill bill) {
         Bill bill1 = billService.save(bill);
         return ResponseEntity.ok(bill1);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody Bill bill) {
+    public ResponseEntity update(@PathVariable("id") Long id, @RequestBody @Valid Bill bill) {
         bill.setId(id);
 
         Bill UpdateBill = billService.update(bill, id);
