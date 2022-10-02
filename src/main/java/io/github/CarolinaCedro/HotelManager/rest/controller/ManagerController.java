@@ -1,6 +1,11 @@
 package io.github.CarolinaCedro.HotelManager.rest.controller;
 
+import io.github.CarolinaCedro.HotelManager.dto.GuestInput.ManagerInput;
+import io.github.CarolinaCedro.HotelManager.infra.entities.Guest;
+import io.github.CarolinaCedro.HotelManager.infra.entities.Inventory;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Manager;
+import io.github.CarolinaCedro.HotelManager.infra.repository.GuestRepository;
+import io.github.CarolinaCedro.HotelManager.infra.repository.InventoryRepository;
 import io.github.CarolinaCedro.HotelManager.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/managers")
@@ -15,6 +22,10 @@ public class ManagerController {
 
     @Autowired
     ManagerService service;
+    @Autowired
+    InventoryRepository inventoryRepository;
+    @Autowired
+    GuestRepository guestRepository;
 
     @GetMapping()
     public ResponseEntity get() {
@@ -27,9 +38,16 @@ public class ManagerController {
     }
 
     @PostMapping
-    public ResponseEntity save(@RequestBody Manager manager) {
-        Manager s = service.save(manager);
-        URI location = getUri(s.getId());
+    public ResponseEntity save(@RequestBody ManagerInput managerInput) {
+
+        Optional<Inventory> inventory = inventoryRepository.findById(managerInput.getInventories());
+
+        List<Inventory> inventoryList = List.of(inventory.get());
+
+        Manager manager = new Manager(managerInput.getName(), managerInput.getPhoneno(), managerInput.getLocation(),inventoryList);
+
+        Manager save = service.save(manager);
+        URI location = getUri(save.getId());
         return ResponseEntity.created(location).build();
     }
 

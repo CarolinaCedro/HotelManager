@@ -25,7 +25,5 @@ public class HouseKeeping {
     @Column(name = "location")
     private String Location;
 
-//    @OneToMany(mappedBy = "receptionist", fetch = FetchType.LAZY)
-//    private List<Bill>bill = new ArrayList<>();
 }
 

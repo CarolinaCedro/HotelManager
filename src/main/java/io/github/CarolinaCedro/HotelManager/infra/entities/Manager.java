@@ -1,5 +1,6 @@
 package io.github.CarolinaCedro.HotelManager.infra.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "manager")
+@Table
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Manager {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,4 +30,15 @@ public class Manager {
 
     @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
     private List<Guest> guest = new ArrayList<>();
+
+
+    @OneToMany
+    private List<Inventory> inventories = new ArrayList<>();
+
+    public Manager(String name, String phoneNo, String location, List<Inventory> inventories) {
+        Name = name;
+        PhoneNo = phoneNo;
+        Location = location;
+        this.inventories = inventories;
+    }
 }

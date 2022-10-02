@@ -2,6 +2,7 @@ package io.github.CarolinaCedro.HotelManager.rest.controller;
 import io.github.CarolinaCedro.HotelManager.dto.GuestInput.GuestInput;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Bill;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Guest;
+import io.github.CarolinaCedro.HotelManager.infra.entities.Inventory;
 import io.github.CarolinaCedro.HotelManager.infra.entities.Manager;
 import io.github.CarolinaCedro.HotelManager.infra.repository.BillRepository;
 import io.github.CarolinaCedro.HotelManager.infra.repository.GuestRepository;
@@ -48,7 +49,6 @@ public class GuestController {
 
         Optional<Manager> manager = managerRepository.findById(guestInput.getManager());
         Optional<Bill> bill = billRepository.findById(guestInput.getBill());
-
 
         Guest guest = new Guest(
                 guestInput.getName(), guestInput.getPhoneno(),
